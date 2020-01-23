@@ -331,7 +331,7 @@ SYSTEM
 SlidyText:
 DATA 5
 DATA "      Q B a s i c  G O R I L L A S  v2.2",15,1,4
-DATA "√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ",7,-1,5
+DATA "‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹", 7,-1,5
 DATA "DELUXE EDITION",15,1,6
 DATA "Original program (c)1990 Microsoft Corporation",3,1,10
 DATA "Gorillas Deluxe (c)1997-2007 Daniel Beardsmore",2,-1,12
@@ -422,7 +422,7 @@ END SUB
 '
 SUB DoExplosion (x#, y#)
  DIM radii(1 TO 4, 1 TO 2), colors(1 TO 4)
- 
+
  IF GSettings.useOldExplosions THEN
   IF GSettings.useSound THEN PLAY "MBO0L32EFGEFDC"
   Radius = ScrHeight / 50
@@ -447,9 +447,9 @@ SUB DoExplosion (x#, y#)
   NEXT
   colors(1) = 4: colors(2) = 2
   colors(3) = 3: colors(4) = 9
-  
+
   IF GSettings.useSound THEN PLAY "MBO0L32EFGEFDC"
-  
+
   '√æ Draw grey smoke, EGA/VGA only
   IF Mode = 9 THEN
    CIRCLE (x#, y#), 1.175 * radii(1, 1), 10
@@ -459,7 +459,7 @@ SUB DoExplosion (x#, y#)
    PAINT (x#, y#), 0, 1
    CIRCLE (x#, y#), 1.175 * radii(1, 1), 0
   END IF
-  
+
   '? Draw vector explosion graphics
   FOR i = 1 TO 4
    Iwidth = 2 * radii(i, 1): Iheight = 2 * radii(i, 2)
@@ -533,7 +533,7 @@ FUNCTION DoShot (Player$(), PlayerNum, x, y, turn, othX, othY)
   END IF
 
   GAng$ = "": Velo$ = ""
- 
+
   LOCATE 2, LocateCol + 3: PRINT "Angle:";
   LOCATE 3, LocateCol: PRINT "Velocity:";
   IF turn > 2 THEN
@@ -543,7 +543,7 @@ FUNCTION DoShot (Player$(), PlayerNum, x, y, turn, othX, othY)
   ELSE
     Pa$ = "": Pv$ = ""
   END IF
- 
+
   WHILE INKEY$ <> "": WEND
   DO: pass = 1
    DO
@@ -552,7 +552,7 @@ FUNCTION DoShot (Player$(), PlayerNum, x, y, turn, othX, othY)
    LOOP UNTIL GAng$ <> ""
    IF LEFT$(GAng$, 1) = "*" THEN GAng$ = RIGHT$(GAng$, LEN(GAng$) - 1)
    angle# = VAL(GAng$)
-   
+
    DO
     Velo$ = Get$(3, LocateCol + 10, Pv$, 1, -200, 1)
     IF Velo$ = "" THEN GOSUB AbortGame
@@ -574,7 +574,7 @@ FUNCTION DoShot (Player$(), PlayerNum, x, y, turn, othX, othY)
     GRightAngle# = angle#: GRightVeloc = velocity
    END IF
   END IF
- 
+
   IF PlayerNum = 2 THEN
    angle# = 180 - angle#
   END IF
@@ -623,7 +623,7 @@ AbortGame:
     Center 1, SPACE$(19)
     GOSUB DSRestoreSun
    END IF
-  
+
    cval = 2 / cval
    tpause! = TIMER
   END IF
@@ -797,7 +797,7 @@ SUB ExplodeGorilla (x#, y#, PlayerHit)
   XAdj = Scl(5)
   SclX# = ScrWidth / 320
   SclY# = ScrHeight / 200
- 
+
   IF GSettings.useSound THEN PLAY "MBO0L16EFGEFDC"
 
   FOR i = 1 TO 16 * SclX#
@@ -811,7 +811,7 @@ SUB ExplodeGorilla (x#, y#, PlayerHit)
     FOR count = 1 TO 200
     NEXT
   NEXT i
- 
+
 END SUB
 
 SUB Extro
@@ -916,7 +916,7 @@ FUNCTION Get$ (Row, Col, Prev$, Typ, Max, Esc)
        LOCATE Row, Col: PRINT Hold$; " ";
       ELSE DoBeep
       END IF
-                        
+
      CASE LEN(Valid$) - 2
      '√æ TAB key
        IF (LEN(Hold$) > 0 AND NOT Typ) OR SpecTab = 1 THEN Hold$ = "*" + Hold$: cont = 1 ELSE DoBeep
@@ -949,7 +949,7 @@ SUB GetInputs (Player$(), NumGames, P)
 
 ' Lay out screen
 
- CLS : RESTORE Setup: Slidy: COLOR 2: LOCATE 2, 1: PRINT STRING$(80, "√ç") '√æ Show screen title
+ CLS : RESTORE Setup: Slidy: COLOR 2: LOCATE 2, 1: PRINT STRING$(80, "ƒ") '√æ Show screen title
  active = 0: FOR fld = 1 TO 4: GOSUB SetupFields: NEXT '√æ Display fields
  fld = 0: GOSUB SetupFields '√æ Display player names
 
@@ -1126,7 +1126,7 @@ ManagePlayers:
  LOOP UNTIL finished
 
 RETURN
-       
+
 CreatePlayer:
  IF P < NPLAYERS THEN
   IF cre = 1 THEN ShowPrompts -12 ELSE ShowPrompts 12
@@ -1136,7 +1136,7 @@ CreatePlayer:
   DO: cont = 1
    IF P < 2 THEN Esc = FALSE ELSE Esc = TRUE '√æ Prevent ESCAPE key when players not yet created
    PDat(P + 1).PNam = RTRIM$(Get$(ny, nx, RTRIM$(PDat(P + 1).PNam), -1, 17, Esc))
-  
+
    IF LTRIM$(PDat(P + 1).PNam) = "" THEN
     cont = 2
    ELSE
@@ -1217,12 +1217,12 @@ DeletePlayer:
     PDefs(upd) = PDefs(upd) - 1
    END IF
   NEXT
- 
+
   IF P = 2 AND PDefs(fld) = 0 AND PDefs(opp) > 0 THEN
    COLOR 8, 0: LOCATE 8 + (fld * 2 - 2), 22
    PRINT "<undefined>      ";
   END IF
- 
+
 
   '√æ Tidies up PDat (array of players)
   Pt = P: P = P - 1: Nt = N
@@ -1240,14 +1240,14 @@ DeletePlayer:
   '√æ This wipes all trace of the deleted player
   PDat(Pt).Won = 0
   PDat(Pt).PNam = "": PDat(Pt).Accu = 0: PDat(Pt).Rounds = 0
-     
+
   N = Pt: cStat = 0: GOSUB Curs
   N = Nt
   IF N > P THEN
    N = N - 1: x = x - 1: IF x = 0 THEN x = 1: y = y - 1: IF y = 0 THEN y = 1
   END IF
   IF P > 0 THEN ShowPrompts fld
- 
+
   IF nextAction > 0 THEN
    cStat = 0: GOSUB Curs '√æ Remove cursor bar
   END IF
@@ -1266,7 +1266,7 @@ DeletePlayer:
    active = 0: GOSUB SetupFields
    SWAP fld, opp: active = 1: GOSUB SetupFields
   END IF
- 
+
   '√æ Ensure always 2 players minimum
   IF P = 1 THEN cre = 1: GOSUB CreatePlayer: cre = 0
 
@@ -1317,20 +1317,20 @@ SetupFields:
    tStr$ = "Maximum rounds? (1 - 99, Default =" + STR$(GSettings.defaultRoundQty) + "):"
    LOCATE 20, 50 - LEN(tStr$): PRINT tStr$
   CASE IS = 4
-   LOCATE 22, 13: PRINT "Gravity in m/s√Ω (1 - 99, Earth = 10):"
+   LOCATE 22, 13: PRINT "Gravity in m/s˝ (1 - 99, Earth = 10):"
  END SELECT
 RETURN
 
 DrawBox:
  COLOR 2, 0
  IF active THEN
-  LOCATE 12, 1: PRINT "√â"; STRING$(78, "√ç"); "¬ª";
-  LOCATE 18, 1: PRINT "√à"; STRING$(78, "√ç"); "¬º";
-  FOR l = 13 TO 17: LOCATE l, 1: PRINT "¬∫"; : LOCATE l, 80: PRINT "¬∫"; : NEXT
+  LOCATE 12, 1: PRINT "⁄"; STRING$(78, "ƒ"); "ø";
+  LOCATE 18, 1: PRINT "¿"; STRING$(78, "ƒ"); "Ÿ";
+  FOR l = 13 TO 17: LOCATE l, 1: PRINT "≥"; : LOCATE l, 80: PRINT "≥"; : NEXT
  ELSE
-  LOCATE 12, 1: PRINT "√ö"; STRING$(78, "√Ñ"); "¬ø";
-  LOCATE 18, 1: PRINT "√Ä"; STRING$(78, "√Ñ"); "√ô";
-  FOR l = 13 TO 17: LOCATE l, 1: PRINT "¬≥"; : LOCATE l, 80: PRINT "¬≥"; : NEXT
+  LOCATE 12, 1: PRINT "⁄"; STRING$(78, "ƒ"); "ø";
+  LOCATE 18, 1: PRINT "¿"; STRING$(78, "ƒ"); "Ÿ";
+  FOR l = 13 TO 17: LOCATE l, 1: PRINT "≥"; : LOCATE l, 80: PRINT "≥"; : NEXT
  END IF
 RETURN
 
@@ -1400,7 +1400,7 @@ SUB GorillaIntro (Player$(), cIntro)
    CLS
    LOCATE 1, 36: PRINT STRING$(10, " ")
    RESTORE Ready: Slidy
-   COLOR 2: LOCATE 15, 31: PRINT "√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç√ç"
+   COLOR 2: LOCATE 15, 31: PRINT "√ƒ==ƒ==ƒ==ƒ==ƒ==ƒ==ƒ==ƒ¥"
    COLOR 9: LOCATE 17, 34: PRINT "= View Intro"
    LOCATE 18, 34: PRINT "= Play Game"
    LOCATE 19, 34: PRINT "= Quit Gorillas"
@@ -1435,19 +1435,19 @@ SUB GorillaIntro (Player$(), cIntro)
   VIEW PRINT 9 TO 24
 
   IF Mode = 9 THEN PALETTE OBJECTCOLOR, BackColor
- 
+
   DrawGorilla x, y, ARMSDOWN
   CLS 2
   DrawGorilla x, y, LEFTUP
   CLS 2
   DrawGorilla x, y, RIGHTUP
   CLS 2
-  
+
   IF Mode = 1 THEN CLS ' For some reason, the above CLS 2s don't work in CGA
- 
+
   VIEW PRINT 1 TO 25
   IF Mode = 9 THEN PALETTE OBJECTCOLOR, 46
- 
+
   IF cIntro = 0 THEN
     IF Mode = 9 THEN
       Rad! = 100: yStep! = 1: DO
@@ -1468,9 +1468,9 @@ SUB GorillaIntro (Player$(), cIntro)
     Center 2, " QBasic G O R I L L A S "
     IF Mode = 9 THEN COLOR 9
     Center 4, "STARRING:"
-    P$ = player$(1) + " AND " + player$(2)
+    P$ = Player$(1) + " AND " + Player$(2)
     IF Mode = 9 THEN COLOR 3
-    Center 5, STRING$(LEN(P$), "√Ñ")
+    Center 5, STRING$(LEN(P$), "ƒ")
     IF Mode = 9 THEN COLOR 2
     Center 6, P$
     IF Mode = 9 THEN COLOR 9
@@ -1558,7 +1558,7 @@ DIM currLine$, eqPos, key$, value$, nBool
  GSettings.defaultRoundQty = 4
  GSettings.showIntro = 1
  GSettings.forceCGA = 0
- 
+
 
  lastErrCode = 0
  ON ERROR GOTO FuckOff
@@ -1756,7 +1756,7 @@ END SUB
 '  BCoor() - user-defined TYPE array which stores upper left coordinates
 '  of each building.
 SUB PlaceGorillas (BCoor() AS XYPoint)
-    
+
   IF Mode = 9 THEN
     XAdj = 14
     YAdj = 30
@@ -1766,7 +1766,7 @@ SUB PlaceGorillas (BCoor() AS XYPoint)
   END IF
   SclX# = ScrWidth / 320
   SclY# = ScrHeight / 200
-    
+
   'Place gorillas on second or third building from edge
   FOR i = 1 TO 2
     IF i = 1 THEN BNum = FNRan(2) + 1 ELSE BNum = LastBuilding - FNRan(2)
@@ -1785,7 +1785,7 @@ END SUB
 '  Player$() - player names
 '  NumGames - number of games to play
 FUNCTION PlayGame (Player$(), NumGames, P)
- 
+
  DIM BCoor(0 TO 30) AS XYPoint
  DIM minRounds
  DIM totalWins(1 TO 2)
@@ -1818,27 +1818,27 @@ FUNCTION PlayGame (Player$(), NumGames, P)
    IF Mode = 9 THEN COLOR 9
    Center 23, STR$(totalWins(1)) + " > Score < " + LTRIM$(STR$(totalWins(2)) + " ")
    Tosser = J + 1: Tossee = 2 - J
-  
+
    'Plot the shot.  Hit is true if Gorilla gets hit.
    Hit = DoShot(Player$(), Tosser, GorillaX(Tosser), GorillaY(Tosser), go, GorillaX(Tossee), GorillaY(Tossee))
    IF Hit = 1 THEN abortYN = TRUE: EXIT DO
    'If the throw was fatal, Tosser now contains the player who WON
-  
+
    'If not hit self then increase number of hits
    IF (J + 1) = Tosser THEN Throw(Tosser) = Throw(Tosser) + 1
-  
+
    IF Hit = TRUE THEN
     'Update scores
     totalWins(Tosser) = totalWins(Tosser) + 1
     IF (J + 1) = Tosser THEN numHits(Tosser, totalWins(Tosser)) = Throw(Tosser)
    END IF
-  
+
    go = go + 1
- 
+
   LOOP
- 
+
   IF abortYN THEN EXIT DO
- 
+
   Throw(1) = 0: Throw(2) = 0
   SLEEP 1
 
@@ -1859,7 +1859,7 @@ FUNCTION PlayGame (Player$(), NumGames, P)
    END IF
   NEXT
  END IF
- 
+
  SCREEN 0
  WIDTH 80, 25
  COLOR 7, 0
@@ -1867,7 +1867,7 @@ FUNCTION PlayGame (Player$(), NumGames, P)
  CLS
  Stats totalWins(), Player$(), avBan!(), P, abortYN
  CLS : RESTORE NowWhat: Slidy
- LOCATE 2, 1: COLOR 2: PRINT STRING$(80, "√ç")
+ LOCATE 2, 1: COLOR 2: PRINT STRING$(80, "Õ")
  LOCATE 4, 4: PRINT "Another game? [Y/N]";
  DO
   in$ = UCASE$(INKEY$)
@@ -1884,9 +1884,9 @@ END FUNCTION
 '  Velocity - shot velocity
 '  PlayerNum - the banana thrower
 FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
-  
+
  angleChk = angle#: IF PlayerNum = 2 THEN angleChk = 180 - angleChk
- 
+
  angle# = angle# / 180 * pi#  'Convert degree angle to radians
  InitXVel# = COS(angle#) * velocity
  InitYVel# = SIN(angle#) * velocity
@@ -1921,7 +1921,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
  pitch! = 9800
  pitchDec! = 100
  pitchDecDec! = (((InitYVel# - DoooMinVeloc) / (200 - DoooMinVeloc)) * 1.2) - .5
- 
+
  t2b# = 9999 '√æ Used to store the time when the banana is to stop moving
              '  when continuing off screen. 9999 means unused.
 
@@ -1940,7 +1940,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
   y# = StartY
   pointval = OBJECTCOLOR
  END IF
- 
+
  '√æ Obtain predicted x-coordinate when banana reaches bottom of screen
  GOSUB PredictBottomOfScreen
  '√æ See if banana will overshoot (direction is +ve for left & -ve for right)
@@ -1964,7 +1964,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
 
   x# = StartXPos + (InitXVel# * t#) + (.5 * (Wind / 5) * t# ^ 2)
   y# = StartYPos + ((-1 * (InitYVel# * t#)) + (.5 * Gravity * t# ^ 2)) * (ScrHeight / 350)
- 
+
   IF y# > oldy# AND InitYVel# > DoooMinVeloc AND NOT Bounced AND MissedDist# > -175 THEN
    '√æ Play banana sound effect
    IF GSettings.useSound THEN SOUND pitch!, 1
@@ -1973,7 +1973,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
     pitch! = pitch! - pitchDec!: pitchDec! = pitchDec! - pitchDecDec!
    END IF
   END IF
-  
+
   IF y# >= ScrHeight - 7 THEN
    '√æ If velocity is still high enough to bounce, and banana is on screen
    IF InitYVel# > 2 AND t2b# = 9999 THEN
@@ -1994,7 +1994,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
     END IF
    END IF
   END IF
- 
+
   '√æ If banana leaves the screen
   IF (x# >= ScrWidth - Scl(10)) OR (x# <= 3) THEN
    '√æ And banana will not return to the screen
@@ -2017,7 +2017,7 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
    'check it
    LookY = 0
    LookX = Scl(8 * (2 - PlayerNum))
-   
+
    DO
     pointval = POINT(x# + LookX, y# + LookY)
     IF pointval = 0 THEN
@@ -2036,18 +2036,18 @@ FUNCTION PlotShot (StartX, StartY, angle#, velocity, PlayerNum, othX, othY)
     LookX = LookX + Direction
     LookY = LookY + Scl(6)
    LOOP UNTIL Impact OR LookX <> Scl(4)
-   
+
    IF NOT ShotInSun AND NOT Impact THEN
     'plot it
     rot = (t# * 10) MOD 4
     CALL DrawBan(x#, y#, rot, TRUE)
     NeedErase = TRUE
    END IF
-           
+
    oldrot = rot
 
   END IF
- 
+
   oldx# = x#
   oldy# = y#
   t# = t# + .1
@@ -2347,7 +2347,7 @@ pGravity:
  COLOR 9
  LOCATE 3, 5: PRINT "Enter input and press [ENTER] to finish and play the game."
  LOCATE 4, 5: PRINT "Or press [TAB] to return to the first entry."
- LOCATE 6, 5: PRINT "Competition gravity is 17 m/s√Ω."
+ LOCATE 6, 5: PRINT "Competition gravity is 17 m/s˝."
 RETURN
 
 '
@@ -2399,7 +2399,7 @@ END SUB
 'SparklePause:
 '  Creates flashing border for intro and statistics screens
 SUB SparklePause (opt AS INTEGER)
-      
+
  DO: LOOP UNTIL INKEY$ = "" '√æ Clear keyboard buffer
  COLOR 12, 0
  a$ = "*    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    "
@@ -2435,11 +2435,11 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
 
  IF abortYN THEN
   RESTORE Aborted: Slidy
-  LOCATE 4, 3: COLOR 2: PRINT STRING$(76, "√ç")
+  LOCATE 4, 3: COLOR 2: PRINT STRING$(76, "Õ")
  ELSE
   '√æ Update and sort the league table
   RESTORE GameOver: Slidy
-  LOCATE 4, 3: COLOR 2: PRINT STRING$(76, "√ç")
+  LOCATE 4, 3: COLOR 2: PRINT STRING$(76, "Õ")
   FOR l = 1 TO 2
    PDat(PDefs(l)).Rounds = PDat(PDefs(l)).Rounds + Wins(1) + Wins(2)
    PDat(PDefs(l)).Won = PDat(PDefs(l)).Won + Wins(l)
@@ -2451,7 +2451,7 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
     END IF
    END IF
   NEXT
-  
+
   '√æ routine to sort the player list
   DO
    complete = 1: tempW1 = 0: tempW2 = 0
@@ -2470,12 +2470,12 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
        PDefs(PDl) = PDefs(PDl) - 1
       END IF
      NEXT
-    
+
      complete = 0
     END IF
    NEXT
   LOOP UNTIL complete
- 
+
   FOR l = 1 TO 2
    IF Wins(1) <> Wins(2) THEN
     D = (Wins(l) >= Wins(2 / l))
@@ -2483,9 +2483,9 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
    ELSE
     COLOR 9: LOCATE 4 + l, 7
    END IF
-   PRINT nam$(l); " "; STRING$(20 - LEN(nam$(l)), "√Ñ"); ""; Wins(l);
+   PRINT nam$(l); " "; STRING$(20 - LEN(nam$(l)), "ƒ"); ""; Wins(l);
    IF (Wins(1) <> Wins(2)) THEN
-     IF D = -1 THEN PRINT CHR$(27); "√Ñ√Ñ√Ñ√Ñ Winnar!";
+     IF D = -1 THEN PRINT CHR$(27); " Winner!";
    ELSEIF l = 1 THEN
     PRINT "   (The game was a draw)";
    END IF
@@ -2493,12 +2493,12 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
    IF posn > 10 THEN PRINT TAB(54); "(position"; RTRIM$(STR$(posn)); "th)"
   NEXT
  END IF
- 
+
  '√æ Show league table no matter what
  LOCATE 8, 20: COLOR 9: PRINT "STATISTICS";
- LOCATE 9, 3: COLOR 2: PRINT "√ö"; STRING$(74, "√Ñ"); "¬ø";
- FOR l = 10 TO 20: LOCATE l, 3: PRINT "¬≥"; TAB(78); "¬≥"; : NEXT
- LOCATE 21, 3: PRINT "√Ä"; STRING$(74, "√Ñ"); "√ô";
+ LOCATE 9, 3: COLOR 2: PRINT "…"; STRING$(74, "Õ"); "ª";
+ FOR l = 10 TO 20: LOCATE l, 3: PRINT "∫"; TAB(78); "∫"; : NEXT
+ LOCATE 21, 3: PRINT "»"; STRING$(74, "Õ"); "º";
  COLOR 3
  LOCATE 9, 5:  PRINT "Place";
  LOCATE 9, 12: PRINT "Player";
@@ -2511,7 +2511,7 @@ SUB Stats (Wins(), nam$(), Ban!(), P, abortYN)
   LOCATE l + 10, 6:
   IF (PDefs(1) = l OR PDefs(2) = l) AND NOT abortYN THEN COLOR 11 ELSE COLOR 5
   IF l < 10 THEN PRINT "0";
-  PRINT LTRIM$(STR$(l)); " √Ñ√Ñ "; TAB(12); PDat(l).PNam
+  PRINT LTRIM$(STR$(l)); "  "; TAB(12); PDat(l).PNam
   COLOR 5: LOCATE l + 10, 31: PRINT PDat(l).Rounds; TAB(39); PDat(l).Won; TAB(45);
   IF PDat(l).Rounds = 0 THEN
    PRINT "-"; TAB(53);
